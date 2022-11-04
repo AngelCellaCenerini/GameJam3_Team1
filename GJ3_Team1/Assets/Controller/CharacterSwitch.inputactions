@@ -1,0 +1,54 @@
+{
+    "name": "CharacterSwitch",
+    "maps": [
+        {
+            "name": "SwitchMesh",
+            "id": "4e533668-ad65-4545-91e2-011521dac08a",
+            "actions": [
+                {
+                    "name": "SwitchRight",
+                    "type": "Button",
+                    "id": "70254e37-6948-4698-822e-072c6820dfa7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchLeft",
+                    "type": "Button",
+                    "id": "4372a863-671f-4672-859f-012b8cd3349b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "13b35757-3fb6-41a6-a48d-7932c2665ff4",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c67a252-89f4-40ae-82ae-89c1373c2a48",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
