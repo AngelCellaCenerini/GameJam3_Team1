@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LivesStringCounter : MonoBehaviour
 {
@@ -36,19 +37,20 @@ public class LivesStringCounter : MonoBehaviour
     {
         if (pressedLeft)
         {
-            //Debug.Log("pressedLeft");
-            // Reset String
-            //livesCounter.text = "";
-            // Change number
-            //currentLife--;
-            //score += currentLife;
-            // livesCounter.text = score;
+            // Update Count
             currentLife--;
             pressedLeft = false;
 
-        }
-        //livesCounter.text = updatedScore;
-        
+            // Check if player looses
+            if (currentLife < 1)
+            {
+                // Trigger Bad Ending
+                SceneManager.LoadScene("BadEnding");
+            }
+
+        };
+
+        // Update String
         updatedScore = score + currentLife;
         livesCounter.text = updatedScore;
     }
@@ -57,10 +59,5 @@ public class LivesStringCounter : MonoBehaviour
     void Update()
     {
         handleCounting();
-        /*
-        currentLife--;
-        updatedScore = score + currentLife;
-        livesCounter.text = updatedScore;
-        */
     }
 }

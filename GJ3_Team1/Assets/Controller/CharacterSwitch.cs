@@ -44,6 +44,15 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PointClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""b14923b3-0df8-4cc4-b4d5-dd56b63b7a6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6c71311-d430-4007-aee9-a2619f741e6b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         m_SwitchMesh = asset.FindActionMap("SwitchMesh", throwIfNotFound: true);
         m_SwitchMesh_SwitchRight = m_SwitchMesh.FindAction("SwitchRight", throwIfNotFound: true);
         m_SwitchMesh_SwitchLeft = m_SwitchMesh.FindAction("SwitchLeft", throwIfNotFound: true);
+        m_SwitchMesh_PointClick = m_SwitchMesh.FindAction("PointClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +160,14 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
     private ISwitchMeshActions m_SwitchMeshActionsCallbackInterface;
     private readonly InputAction m_SwitchMesh_SwitchRight;
     private readonly InputAction m_SwitchMesh_SwitchLeft;
+    private readonly InputAction m_SwitchMesh_PointClick;
     public struct SwitchMeshActions
     {
         private @CharacterSwitch m_Wrapper;
         public SwitchMeshActions(@CharacterSwitch wrapper) { m_Wrapper = wrapper; }
         public InputAction @SwitchRight => m_Wrapper.m_SwitchMesh_SwitchRight;
         public InputAction @SwitchLeft => m_Wrapper.m_SwitchMesh_SwitchLeft;
+        public InputAction @PointClick => m_Wrapper.m_SwitchMesh_PointClick;
         public InputActionMap Get() { return m_Wrapper.m_SwitchMesh; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +183,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                 @SwitchLeft.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnSwitchLeft;
                 @SwitchLeft.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnSwitchLeft;
                 @SwitchLeft.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnSwitchLeft;
+                @PointClick.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
+                @PointClick.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
+                @PointClick.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
             }
             m_Wrapper.m_SwitchMeshActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +196,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                 @SwitchLeft.started += instance.OnSwitchLeft;
                 @SwitchLeft.performed += instance.OnSwitchLeft;
                 @SwitchLeft.canceled += instance.OnSwitchLeft;
+                @PointClick.started += instance.OnPointClick;
+                @PointClick.performed += instance.OnPointClick;
+                @PointClick.canceled += instance.OnPointClick;
             }
         }
     }
@@ -178,5 +207,6 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
     {
         void OnSwitchRight(InputAction.CallbackContext context);
         void OnSwitchLeft(InputAction.CallbackContext context);
+        void OnPointClick(InputAction.CallbackContext context);
     }
 }
