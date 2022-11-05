@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RestartGame : MonoBehaviour
 {
-
-    // Update is called once per frame
     public void changeScene()
     {
         // Restart Game
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("Title");
     }
 }
