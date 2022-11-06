@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ToPush
   - ToAvoid
+  - FinalDestination
   layers:
   - Default
   - TransparentFX
