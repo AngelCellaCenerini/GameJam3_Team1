@@ -32,6 +32,8 @@ public class AnimMovementController : MonoBehaviour
     float groundedGravity = -.05f;
     float gravity = -9.18f;
 
+    // Player Character
+    public CharacterSwitcher characterScript;
 
     void Awake()
     {
@@ -92,18 +94,22 @@ public class AnimMovementController : MonoBehaviour
 
     void handleJump()
     {
-        // Check if jumping
-        if (!isJumping && characterController.isGrounded && isJumpPressed)
+        // Check Player's Skin
+        if (characterScript.secondSkin)
         {
-            // Jump
-            isJumping = true;
-            currentMovement.y = initialJumpVelocity;
-            currentRunMovement.y = initialJumpVelocity;
-        }
-        else if(!isJumpPressed && isJumping && characterController.isGrounded)
-        {
-            // Restore State
-            isJumping = false;
+            // Check if jumping
+            if (!isJumping && characterController.isGrounded && isJumpPressed)
+            {
+                // Jump
+                isJumping = true;
+                currentMovement.y = initialJumpVelocity;
+                currentRunMovement.y = initialJumpVelocity;
+            }
+            else if (!isJumpPressed && isJumping && characterController.isGrounded)
+            {
+                // Restore State
+                isJumping = false;
+            }
         }
     }
 
@@ -170,7 +176,7 @@ public class AnimMovementController : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         // Move
         // Check if running

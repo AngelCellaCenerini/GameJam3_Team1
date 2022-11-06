@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CharacterSwitcher : MonoBehaviour
 {
@@ -9,17 +10,27 @@ public class CharacterSwitcher : MonoBehaviour
     bool pressedRight;
     bool pressedLeft;
 
-   [SerializeField] private MeshFilter currentCharacter;
-   [SerializeField] private Mesh[] chosenCharacter;
-
+    [SerializeField] private MeshFilter currentCharacter;
+    [SerializeField] private Mesh[] chosenCharacter;
     private int currentModel = 0;
+
+    // Menu UI
+    [SerializeField] public RawImage currentCatIcon;
+    [SerializeField] public Texture[] chosenCatIcon;
+    private int currentCharacterIcon = 0;
+    public Sprite arrowIcon;
+
+    // Skin Menu & Skins
+    public GameObject skinMenu;
+    public bool firstSkin = true;
+    public bool secondSkin = false;
+    public bool thirdSkin = false;
 
     void Awake()
     {
         // Handle Input Action
         characterSwitch = new CharacterSwitch();
         characterSwitch.SwitchMesh.SwitchRight.performed += switchRight;
-        characterSwitch.SwitchMesh.SwitchLeft.performed += switchLeft; 
     }
 
     public void switchRight(InputAction.CallbackContext context)
@@ -27,64 +38,63 @@ public class CharacterSwitcher : MonoBehaviour
         pressedRight = context.ReadValueAsButton();
     }
 
-    public void switchLeft(InputAction.CallbackContext context)
-    {
-            pressedLeft = context.ReadValueAsButton();
-    }
-
     public void handleSwitch()
     {
-        // Check for Input
-        if (pressedRight)
+        // Check if Skin Menu is active
+        if (skinMenu.activeSelf)
         {
-            // Go to next Mesh
-            currentModel++;
-            // onSwitch();
-            // Debug.Log(currentModel);
-
-            // Reset Array
-            if (currentModel >= chosenCharacter.Length)
+            // Check for Input
+            if (pressedRight)
             {
-                currentModel = 0;
+                // Go to next Mesh
+                currentModel++;
+                // Go to next Icon
+                currentCharacterIcon++;
+
+                // Reset Mesh Array
+                if (currentModel >= chosenCharacter.Length)
+                {
+                    currentModel = 0;
+                }
+                // Reset Icon Array
+                if (currentCharacterIcon >= chosenCatIcon.Length)
+                {
+                    currentCharacterIcon = 0;
+                }
+
+                // Reset State
+                pressedRight = false;
+
+                // Update Abilities
+                checkCurrentMesh();
             }
 
-            // Reset State
-            pressedRight = false;
+            // Update Meshes and Icons
+            currentCharacter.mesh = chosenCharacter[currentModel];
+            currentCatIcon.texture = chosenCatIcon[currentCharacterIcon];
         }
-        else if (pressedLeft)
-        {
-            // Switch to previous character
-            // Go to next Mesh
-            //Debug.Log(currentModel);
-            //currentModel--;
-            //onSwitch();
-            //pressedLeft = false;
-
-            /*
-            // Reset Array
-            if (currentModel <= 1)
-            {
-                //currentModel = 3;
-            }
-            // Reset State
-            pressedLeft = false;
-            */
-        }
-
-        currentCharacter.mesh = chosenCharacter[currentModel];
     }
 
-    void onSwitch()
+    void checkCurrentMesh()
     {
-        if (currentModel <= 1) {
-            // currentModel = 3;
-        }
-        if (currentModel >= chosenCharacter.Length)
+        if (currentModel == 0)
         {
-            currentModel = 0;
+            firstSkin = true;
+            secondSkin = false;
+            thirdSkin = false;
         }
-
-        currentCharacter.mesh = chosenCharacter[currentModel];
+        else if (currentModel == 1)
+        {
+            firstSkin = false;
+            secondSkin = true;
+            thirdSkin = false;
+        }
+        else if (currentModel == 2)
+        {
+            firstSkin = false;
+            secondSkin = false;
+            thirdSkin = true;
+        }
     }
 
     // Update is called once per frame
@@ -92,22 +102,6 @@ public class CharacterSwitcher : MonoBehaviour
     {
         // Handle Keyboard Input
         handleSwitch();
-
-       /* characterSwitch.SwitchMesh.Switch.ReadValueAsButton();
-        if (isSpaceKeyHeld)
-        {
-            Debug.Log("SPACEBAR");
-            currentCharacter.mesh = chosenCharacter[currentModel];
-            // Go to next Mesh
-            currentModel++;
-            // Reset Array
-            if (currentModel >= chosenCharacter.Length)
-            {
-                currentModel = 0;
-            }
-         
-        }
-       */   
     }
 
     void OnEnable()

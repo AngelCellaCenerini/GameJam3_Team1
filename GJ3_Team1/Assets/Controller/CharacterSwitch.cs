@@ -90,6 +90,34 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""OpenSkinMenu"",
+            ""id"": ""6d33de7c-b2df-4094-a500-76ce07e25715"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""288d9e1f-9a25-498a-944f-8ea0ec1bc7b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""23d0eded-1ea1-43ca-8afa-208befc1c174"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -99,6 +127,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         m_SwitchMesh_SwitchRight = m_SwitchMesh.FindAction("SwitchRight", throwIfNotFound: true);
         m_SwitchMesh_SwitchLeft = m_SwitchMesh.FindAction("SwitchLeft", throwIfNotFound: true);
         m_SwitchMesh_PointClick = m_SwitchMesh.FindAction("PointClick", throwIfNotFound: true);
+        // OpenSkinMenu
+        m_OpenSkinMenu = asset.FindActionMap("OpenSkinMenu", throwIfNotFound: true);
+        m_OpenSkinMenu_OpenMenu = m_OpenSkinMenu.FindAction("OpenMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -203,10 +234,47 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         }
     }
     public SwitchMeshActions @SwitchMesh => new SwitchMeshActions(this);
+
+    // OpenSkinMenu
+    private readonly InputActionMap m_OpenSkinMenu;
+    private IOpenSkinMenuActions m_OpenSkinMenuActionsCallbackInterface;
+    private readonly InputAction m_OpenSkinMenu_OpenMenu;
+    public struct OpenSkinMenuActions
+    {
+        private @CharacterSwitch m_Wrapper;
+        public OpenSkinMenuActions(@CharacterSwitch wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenMenu => m_Wrapper.m_OpenSkinMenu_OpenMenu;
+        public InputActionMap Get() { return m_Wrapper.m_OpenSkinMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(OpenSkinMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IOpenSkinMenuActions instance)
+        {
+            if (m_Wrapper.m_OpenSkinMenuActionsCallbackInterface != null)
+            {
+                @OpenMenu.started -= m_Wrapper.m_OpenSkinMenuActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.performed -= m_Wrapper.m_OpenSkinMenuActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.canceled -= m_Wrapper.m_OpenSkinMenuActionsCallbackInterface.OnOpenMenu;
+            }
+            m_Wrapper.m_OpenSkinMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OpenMenu.started += instance.OnOpenMenu;
+                @OpenMenu.performed += instance.OnOpenMenu;
+                @OpenMenu.canceled += instance.OnOpenMenu;
+            }
+        }
+    }
+    public OpenSkinMenuActions @OpenSkinMenu => new OpenSkinMenuActions(this);
     public interface ISwitchMeshActions
     {
         void OnSwitchRight(InputAction.CallbackContext context);
         void OnSwitchLeft(InputAction.CallbackContext context);
         void OnPointClick(InputAction.CallbackContext context);
+    }
+    public interface IOpenSkinMenuActions
+    {
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
 }

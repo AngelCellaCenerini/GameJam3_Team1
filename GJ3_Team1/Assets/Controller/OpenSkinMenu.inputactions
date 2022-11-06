@@ -1,0 +1,34 @@
+{
+    "name": "OpenSkinMenu",
+    "maps": [
+        {
+            "name": "SkinMenu",
+            "id": "c733e180-6220-40d6-abae-aca6fb5a9a6b",
+            "actions": [
+                {
+                    "name": "OpenSkinMenu",
+                    "type": "Button",
+                    "id": "6ef1fd31-df6f-47d3-94e6-0e37ada52505",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f3bbe533-65d8-4595-bfd9-b801d97dfa05",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenSkinMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -12,52 +12,37 @@ public class LivesStringCounter : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesCounter;
     public string score;
     public string updatedScore;
-
-    CharacterSwitch characterSwitch;
-    public bool pressedLeft;
     private int currentLife = 9;
+
+    // Check Skin Menu Input
+    [SerializeField] private Button confirmButton = null;
 
     void Awake()
     {
-        // Handle Input Action
-        characterSwitch = new CharacterSwitch();
-        characterSwitch.SwitchMesh.SwitchLeft.performed += switchLeft;
 
         score = "x"; 
         updatedScore = score + currentLife;
         livesCounter.text = updatedScore;
-    }
 
-    public void switchLeft(InputAction.CallbackContext context)
-    {
-        pressedLeft = context.ReadValueAsButton();
+        // CONFIRM Button
+        confirmButton.onClick.AddListener(handleCounting);
     }
 
     public void handleCounting()
     {
-        if (pressedLeft)
+        Debug.Log("isClicked!!");
+        // Update Count
+        currentLife--;
+
+        // Check if player looses
+        if (currentLife < 1)
         {
-            // Update Count
-            currentLife--;
-            pressedLeft = false;
-
-            // Check if player looses
-            if (currentLife < 1)
-            {
-                // Trigger Bad Ending
-                SceneManager.LoadScene("BadEnding");
-            }
-
-        };
+            // Trigger Bad Ending
+            SceneManager.LoadScene("BadEnding");
+        }
 
         // Update String
         updatedScore = score + currentLife;
         livesCounter.text = updatedScore;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        handleCounting();
     }
 }
