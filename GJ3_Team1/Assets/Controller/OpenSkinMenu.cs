@@ -35,6 +35,15 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseSkinMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fc42362-4bb2-475e-b112-0bc796fefe3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
                     ""action"": ""OpenSkinMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea8f33f4-30ed-4999-a5c2-b90bf7f2d4c1"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseSkinMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
         // SkinMenu
         m_SkinMenu = asset.FindActionMap("SkinMenu", throwIfNotFound: true);
         m_SkinMenu_OpenSkinMenu = m_SkinMenu.FindAction("OpenSkinMenu", throwIfNotFound: true);
+        m_SkinMenu_CloseSkinMenu = m_SkinMenu.FindAction("CloseSkinMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +138,13 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_SkinMenu;
     private ISkinMenuActions m_SkinMenuActionsCallbackInterface;
     private readonly InputAction m_SkinMenu_OpenSkinMenu;
+    private readonly InputAction m_SkinMenu_CloseSkinMenu;
     public struct SkinMenuActions
     {
         private @OpenSkinMenu m_Wrapper;
         public SkinMenuActions(@OpenSkinMenu wrapper) { m_Wrapper = wrapper; }
         public InputAction @OpenSkinMenu => m_Wrapper.m_SkinMenu_OpenSkinMenu;
+        public InputAction @CloseSkinMenu => m_Wrapper.m_SkinMenu_CloseSkinMenu;
         public InputActionMap Get() { return m_Wrapper.m_SkinMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +157,9 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
                 @OpenSkinMenu.started -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnOpenSkinMenu;
                 @OpenSkinMenu.performed -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnOpenSkinMenu;
                 @OpenSkinMenu.canceled -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnOpenSkinMenu;
+                @CloseSkinMenu.started -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnCloseSkinMenu;
+                @CloseSkinMenu.performed -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnCloseSkinMenu;
+                @CloseSkinMenu.canceled -= m_Wrapper.m_SkinMenuActionsCallbackInterface.OnCloseSkinMenu;
             }
             m_Wrapper.m_SkinMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +167,9 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
                 @OpenSkinMenu.started += instance.OnOpenSkinMenu;
                 @OpenSkinMenu.performed += instance.OnOpenSkinMenu;
                 @OpenSkinMenu.canceled += instance.OnOpenSkinMenu;
+                @CloseSkinMenu.started += instance.OnCloseSkinMenu;
+                @CloseSkinMenu.performed += instance.OnCloseSkinMenu;
+                @CloseSkinMenu.canceled += instance.OnCloseSkinMenu;
             }
         }
     }
@@ -148,5 +177,6 @@ public partial class @OpenSkinMenu : IInputActionCollection2, IDisposable
     public interface ISkinMenuActions
     {
         void OnOpenSkinMenu(InputAction.CallbackContext context);
+        void OnCloseSkinMenu(InputAction.CallbackContext context);
     }
 }

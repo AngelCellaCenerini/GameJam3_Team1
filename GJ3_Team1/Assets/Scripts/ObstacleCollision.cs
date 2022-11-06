@@ -8,26 +8,31 @@ public class ObstacleCollision : MonoBehaviour
     public CharacterSwitcher characterScript;
 
     private float forceApplied = 2.0f;
+    public bool obstacleIsHit;
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Check Player's Skin & Abilities
-        if (characterScript.thirdSkin)
+        // Check Collided Body
+        if (hit.gameObject.tag == "ToPush")
         {
-            // Get Obstacle's Rigidbody
-            Rigidbody obstacleBody = hit.collider.attachedRigidbody;
-
-            // Check if null
-            if (obstacleBody != null)
+            // Check Player's Skin & Abilities
+            if (characterScript.thirdSkin)
             {
-                // Direct Force
-                Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
-                // Remove Y coordinate
-                //forceDirection.y = 0;
-                // Normalize Force Vector
-                forceDirection.Normalize();
-                // Apply Force
-                obstacleBody.AddForceAtPosition(forceDirection * forceApplied, transform.position, ForceMode.Impulse);
+                // Get Obstacle's Rigidbody
+                Rigidbody obstacleBody = hit.collider.attachedRigidbody;
+
+                // Check if null
+                if (obstacleBody != null)
+                {
+                    // Direct Force
+                    Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
+                    // Remove Y coordinate
+                    //forceDirection.y = 0;
+                    // Normalize Force Vector
+                    forceDirection.Normalize();
+                    // Apply Force
+                    obstacleBody.AddForceAtPosition(forceDirection * forceApplied, transform.position, ForceMode.Impulse);
+                }
             }
         }
     }
