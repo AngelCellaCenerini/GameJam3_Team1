@@ -31,7 +31,12 @@ public class CharacterSwitcher : MonoBehaviour
         // Handle Input Action
         characterSwitch = new CharacterSwitch();
         characterSwitch.SwitchMesh.SwitchRight.performed += switchRight;
-    }
+
+        // States
+        firstSkin = true;
+        secondSkin = false;
+        thirdSkin = false;
+}
 
     public void switchRight(InputAction.CallbackContext context)
     {
@@ -82,6 +87,7 @@ public class CharacterSwitcher : MonoBehaviour
             firstSkin = true;
             secondSkin = false;
             thirdSkin = false;
+            Debug.Log(firstSkin);
         }
         else if (currentModel == 1)
         {
