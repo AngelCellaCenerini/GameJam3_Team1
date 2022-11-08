@@ -8,6 +8,8 @@ TagManager:
   - ToAvoid
   - FinalDestination
   - ToClimb
+  - DropOff
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
