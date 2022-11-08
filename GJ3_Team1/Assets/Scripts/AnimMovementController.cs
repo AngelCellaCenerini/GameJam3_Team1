@@ -31,6 +31,8 @@ public class AnimMovementController : MonoBehaviour
     // Gravity
     float groundedGravity = -.05f;
     float gravity = -9.18f;
+    // Rotation
+    float rotationFactorPerFrame = 15.0f;
 
     // Player Character
     public CharacterSwitcher characterScript;
@@ -58,6 +60,27 @@ public class AnimMovementController : MonoBehaviour
 
         setJumpVariables();
 
+    }
+
+    void handleRotation()
+    {
+        // Update Character Orientation
+        Vector3 positionToLookAt;
+        // Position Character should point to
+        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.y = 0.0f;
+        positionToLookAt.z = currentMovement.z;
+        // Current Character Rotation
+        Quaternion currentRotation = transform.rotation;
+
+        // Check if Character is moving 
+        if (isMovementPressed)
+        {
+            // New Rotation based on updated position
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+        }
+        
     }
 
     void onMovementInput(InputAction.CallbackContext context)
@@ -110,24 +133,6 @@ public class AnimMovementController : MonoBehaviour
                 // Restore State
                 isJumping = false;
             }
-        }
-    }
-
-    void handleRotation()
-    {
-        // Handle Animation Direction on Rotation
-        Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
-        positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.y;
-
-        // Register current rotation
-        Quaternion currentRotation = transform.rotation;
-        // Create new rotation
-        if (isMovementPressed)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFractorPerFrame * Time.deltaTime);
         }
     }
 
@@ -196,6 +201,7 @@ public class AnimMovementController : MonoBehaviour
 
         handleGravity();
         handleJump();
+        handleRotation();
     }
 
     void OnEnable()
