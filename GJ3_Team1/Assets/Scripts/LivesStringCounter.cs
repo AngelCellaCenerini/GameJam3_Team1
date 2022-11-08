@@ -19,6 +19,8 @@ public class LivesStringCounter : MonoBehaviour
     public ChangeCharacterUI characterChoice;
     // Check Obstacle Damage
     public ObstacleDamage obstacleDamage;
+    // Check DropOff Damage
+    public CheckPointRespawn dropOffDamage;
 
     void Awake()
     {
@@ -33,11 +35,13 @@ public class LivesStringCounter : MonoBehaviour
 
     public void checkObstacleDamage()
     {
-        if (obstacleDamage.isDamaged || characterChoice.choiceIsConfirmed)
+        if (obstacleDamage.isDamaged || characterChoice.choiceIsConfirmed || dropOffDamage.lifeIsLost)
         {
             handleCounting();
+            // Reset 
             obstacleDamage.isDamaged = false;
             characterChoice.choiceIsConfirmed = false;
+            dropOffDamage.lifeIsLost = false;
         }
     }
 

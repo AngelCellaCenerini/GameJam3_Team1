@@ -5,6 +5,7 @@ using UnityEngine;
 public class CheckPointRespawn : MonoBehaviour
 {
     Transform respawnCoordinates;
+    public Transform firstRespawn;
     public Transform respawnCoordinates1;
     public Transform respawnCoordinates2;
     public GameObject player;
@@ -13,9 +14,11 @@ public class CheckPointRespawn : MonoBehaviour
     bool progress2 = false;
     bool currentProgress;
 
+    public bool lifeIsLost = false;
+
     void Start()
     {
-        respawnCoordinates = respawnCoordinates1;
+        respawnCoordinates = firstRespawn;
     }
 
     void OnTriggerEnter(Collider other)
@@ -43,7 +46,13 @@ public class CheckPointRespawn : MonoBehaviour
             {
                 // Respawn Player
                 player.transform.position = respawnCoordinates.transform.position;
-            }           
+            }
+            else {
+                // Respawn Player
+                player.transform.position = respawnCoordinates.transform.position;
+                // Apply Damage
+                lifeIsLost = true;
+            }
         }
     }
 }
