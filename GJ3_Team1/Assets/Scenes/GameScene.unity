@@ -2611,14 +2611,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.0037735105, b: 0.0037735105, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 10910, guid: 0000000000000000f000000000000000, type: 0}
+  m_Texture: {fileID: 2800000, guid: c2d0f1407e8417f41ab55ae23b22ea30, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4405,9 +4405,9 @@ MonoBehaviour:
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   currentCatIcon: {fileID: 787630519}
   chosenCatIcon:
-  - {fileID: 10910, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2800000, guid: c2d0f1407e8417f41ab55ae23b22ea30, type: 3}
+  - {fileID: 2800000, guid: 52864eda370e960408e8d006a5cfd638, type: 3}
+  - {fileID: 2800000, guid: 13bb7d996c6f5b74caafba1b295d2a83, type: 3}
   arrowIcon: {fileID: 21300000, guid: 89ac11c0747d9914fb42a3a1fa44b650, type: 3}
   skinMenu: {fileID: 900953383}
   firstSkin: 0
