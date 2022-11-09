@@ -8,6 +8,6 @@ public class RestartGame : MonoBehaviour
     public void changeScene()
     {
         // Restart Game
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("GameScene");
     }
 }
