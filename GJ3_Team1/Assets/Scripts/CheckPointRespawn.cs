@@ -17,6 +17,7 @@ public class CheckPointRespawn : MonoBehaviour
     public GameObject dropOffF1;
 
     public LivesStringCounter skinChange;
+    public GameObject floor2;
 
     public bool lifeIsLost = false;
 
@@ -32,14 +33,18 @@ public class CheckPointRespawn : MonoBehaviour
 
     void Update()
     {
-        // Respawn when Skin is Switched
-        if (skinChange.isChanged)
+        // Check if Second Floor
+        if (floor2.activeSelf)
         {
-            // Respawn Player
-            player.transform.position = respawnCoordinates.transform.position;
+            // Respawn when Skin is Switched
+            if (skinChange.isChanged)
+            {
+                // Respawn Player
+                player.transform.position = respawnCoordinates.transform.position;
 
-            // Reset
-            skinChange.isChanged = false;
+                // Reset
+                skinChange.isChanged = false;
+            }
         }
     }
 
