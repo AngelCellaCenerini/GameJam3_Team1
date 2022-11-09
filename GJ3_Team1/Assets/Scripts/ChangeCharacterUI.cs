@@ -41,16 +41,21 @@ public class ChangeCharacterUI : MonoBehaviour
             }
         }
 
-        // Close menu
-        if (isClosed)
+        
+        if (skinMenu.activeSelf)
         {
-            choiceIsConfirmed = true;
-            if (skinMenu.activeSelf)
+            // Close menu
+            if (isClosed)
             {
-                skinMenu.SetActive(false);
-                isClosed = false;
+                choiceIsConfirmed = true;
+                if (skinMenu.activeSelf)
+                {
+                    skinMenu.SetActive(false);
+                    isClosed = false;
+                }
             }
         }
+        
     }
 
     public void openMenu()
