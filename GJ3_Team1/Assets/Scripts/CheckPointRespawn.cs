@@ -34,17 +34,26 @@ public class CheckPointRespawn : MonoBehaviour
     void Update()
     {
         // Check if Second Floor
-        if (floor2.activeSelf)
+        if (skinChange.isChanged) 
         {
+            // Reset
+            skinChange.isChanged = false;
+
             // Respawn when Skin is Switched
-            if (skinChange.isChanged)
+            if (floor2.activeSelf)
             {
                 // Respawn Player
                 player.transform.position = respawnCoordinates.transform.position;
+                //respawnCoordinates = respawnCoordinates1;
 
-                // Reset
-                skinChange.isChanged = false;
+
             }
+        }
+
+        if (floor2.activeSelf)
+        {
+            // Respawn Player
+            respawnCoordinates = respawnCoordinates1;
         }
     }
 
@@ -69,6 +78,7 @@ public class CheckPointRespawn : MonoBehaviour
         // Check if Player drops off platform
         if (other.gameObject.tag == "DropOff")
         {
+            Debug.Log("TriggeredDrop");
             // Check if User Reached CHeckpoint
             if (currentProgress)
             {
