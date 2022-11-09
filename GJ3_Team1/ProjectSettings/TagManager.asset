@@ -11,6 +11,7 @@ TagManager:
   - DropOff
   - CheckPoint
   - ButtonToPress
+  - Ramp
   layers:
   - Default
   - TransparentFX
