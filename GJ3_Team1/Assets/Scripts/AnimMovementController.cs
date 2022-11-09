@@ -89,10 +89,10 @@ public class AnimMovementController : MonoBehaviour
         // Walk
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = -currentMovementInput.x;
-        currentMovement.z = currentMovementInput.y;
+        currentMovement.z = -currentMovementInput.y;
         // Run
         currentRunMovement.x = -currentMovementInput.x * runMultiplier;
-        currentRunMovement.z = currentMovementInput.y * runMultiplier;
+        currentRunMovement.z = -currentMovementInput.y * runMultiplier;
         // Check if moving
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
