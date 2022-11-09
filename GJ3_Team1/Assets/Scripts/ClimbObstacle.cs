@@ -11,14 +11,17 @@ public class ClimbObstacle : MonoBehaviour
 
     bool isClimbing = false;
     private Animator platformAnimator;
+    private Animator platformAnimator2;
 
     public GameObject platform;
+    public GameObject platform2;
 
     void Awake()
     {
         // References
         playerInput = new PlayerInput();
         platformAnimator = platform.GetComponent<Animator>();
+        platformAnimator2 = platform2.GetComponent<Animator>();
         // Climb
         playerInput.CharacterControls.Climb.performed += onClimb;
     }
@@ -27,16 +30,6 @@ public class ClimbObstacle : MonoBehaviour
     {
         isClimbing = context.ReadValueAsButton();
     }
-
-    void FixedUpdate()
-    {
-        if (platformAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-        {
-            // Debug.Log("Animation over");
-        }
-    }
-
-
 
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
@@ -48,6 +41,7 @@ public class ClimbObstacle : MonoBehaviour
             {
                 // Move Platform
                 platformAnimator.SetBool("isClimbing", true);
+                platformAnimator2.SetBool("isClimbing", true);
 
                 // Trigger Ending
                 StartCoroutine(ExecuteAfterTime(2));
@@ -63,6 +57,7 @@ public class ClimbObstacle : MonoBehaviour
 
         // Reset Animation
         platformAnimator.SetBool("isClimbing", false);
+        platformAnimator2.SetBool("isClimbing", false);
 
 
     }

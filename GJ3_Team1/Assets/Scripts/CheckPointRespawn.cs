@@ -14,11 +14,33 @@ public class CheckPointRespawn : MonoBehaviour
     bool progress2 = false;
     bool currentProgress;
 
+    public GameObject dropOffF1;
+
+    public LivesStringCounter skinChange;
+
     public bool lifeIsLost = false;
+
+    void Awake()
+    {
+        respawnCoordinates = firstRespawn;
+    }
 
     void Start()
     {
         respawnCoordinates = firstRespawn;
+    }
+
+    void Update()
+    {
+        // Respawn when Skin is Switched
+        if (skinChange.isChanged)
+        {
+            // Respawn Player
+            player.transform.position = respawnCoordinates.transform.position;
+
+            // Reset
+            skinChange.isChanged = false;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -28,6 +50,7 @@ public class CheckPointRespawn : MonoBehaviour
         if (other.gameObject.name == "CheckPoinTrigger1")
         {
             progress1 = true;
+            dropOffF1.SetActive(true);
             currentProgress = progress1;
             respawnCoordinates = respawnCoordinates1;
         }

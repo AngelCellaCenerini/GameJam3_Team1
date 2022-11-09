@@ -44,8 +44,7 @@ public class ChangeCharacterUI : MonoBehaviour
         // Close menu
         if (isClosed)
         {
-            choiceIsConfirmed = true; 
-
+            choiceIsConfirmed = true;
             if (skinMenu.activeSelf)
             {
                 skinMenu.SetActive(false);

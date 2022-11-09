@@ -22,6 +22,8 @@ public class LivesStringCounter : MonoBehaviour
     // Check DropOff Damage
     public CheckPointRespawn dropOffDamage;
 
+    public bool isChanged = false;
+
     void Awake()
     {
 
@@ -42,6 +44,8 @@ public class LivesStringCounter : MonoBehaviour
             obstacleDamage.isDamaged = false;
             characterChoice.choiceIsConfirmed = false;
             dropOffDamage.lifeIsLost = false;
+            // Respawn
+            isChanged = true;
         }
     }
 

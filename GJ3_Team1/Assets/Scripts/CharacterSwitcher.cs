@@ -87,7 +87,6 @@ public class CharacterSwitcher : MonoBehaviour
             firstSkin = true;
             secondSkin = false;
             thirdSkin = false;
-            Debug.Log(firstSkin);
         }
         else if (currentModel == 1)
         {
