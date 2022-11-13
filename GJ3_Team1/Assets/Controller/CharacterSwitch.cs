@@ -53,6 +53,33 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseWC"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7ef9b9b-5501-4cd7-8d77-8c655fa1907b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseBC"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7be0418-6cca-4e5f-a337-e2c13bd10d7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseYC"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c266244-8bbe-45d7-9304-f050a5c7def7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,6 +113,39 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PointClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ffb59fd-47f3-4600-bcaa-2a3f6548314e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseWC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50a6e758-3904-43b6-a6b0-730ef6e5ce28"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseBC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbd42749-f6ac-4760-ab68-200e434462a8"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseYC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -127,6 +187,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         m_SwitchMesh_SwitchRight = m_SwitchMesh.FindAction("SwitchRight", throwIfNotFound: true);
         m_SwitchMesh_SwitchLeft = m_SwitchMesh.FindAction("SwitchLeft", throwIfNotFound: true);
         m_SwitchMesh_PointClick = m_SwitchMesh.FindAction("PointClick", throwIfNotFound: true);
+        m_SwitchMesh_ChooseWC = m_SwitchMesh.FindAction("ChooseWC", throwIfNotFound: true);
+        m_SwitchMesh_ChooseBC = m_SwitchMesh.FindAction("ChooseBC", throwIfNotFound: true);
+        m_SwitchMesh_ChooseYC = m_SwitchMesh.FindAction("ChooseYC", throwIfNotFound: true);
         // OpenSkinMenu
         m_OpenSkinMenu = asset.FindActionMap("OpenSkinMenu", throwIfNotFound: true);
         m_OpenSkinMenu_OpenMenu = m_OpenSkinMenu.FindAction("OpenMenu", throwIfNotFound: true);
@@ -192,6 +255,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
     private readonly InputAction m_SwitchMesh_SwitchRight;
     private readonly InputAction m_SwitchMesh_SwitchLeft;
     private readonly InputAction m_SwitchMesh_PointClick;
+    private readonly InputAction m_SwitchMesh_ChooseWC;
+    private readonly InputAction m_SwitchMesh_ChooseBC;
+    private readonly InputAction m_SwitchMesh_ChooseYC;
     public struct SwitchMeshActions
     {
         private @CharacterSwitch m_Wrapper;
@@ -199,6 +265,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         public InputAction @SwitchRight => m_Wrapper.m_SwitchMesh_SwitchRight;
         public InputAction @SwitchLeft => m_Wrapper.m_SwitchMesh_SwitchLeft;
         public InputAction @PointClick => m_Wrapper.m_SwitchMesh_PointClick;
+        public InputAction @ChooseWC => m_Wrapper.m_SwitchMesh_ChooseWC;
+        public InputAction @ChooseBC => m_Wrapper.m_SwitchMesh_ChooseBC;
+        public InputAction @ChooseYC => m_Wrapper.m_SwitchMesh_ChooseYC;
         public InputActionMap Get() { return m_Wrapper.m_SwitchMesh; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -217,6 +286,15 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                 @PointClick.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
                 @PointClick.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
                 @PointClick.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnPointClick;
+                @ChooseWC.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseWC;
+                @ChooseWC.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseWC;
+                @ChooseWC.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseWC;
+                @ChooseBC.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseBC;
+                @ChooseBC.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseBC;
+                @ChooseBC.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseBC;
+                @ChooseYC.started -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseYC;
+                @ChooseYC.performed -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseYC;
+                @ChooseYC.canceled -= m_Wrapper.m_SwitchMeshActionsCallbackInterface.OnChooseYC;
             }
             m_Wrapper.m_SwitchMeshActionsCallbackInterface = instance;
             if (instance != null)
@@ -230,6 +308,15 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
                 @PointClick.started += instance.OnPointClick;
                 @PointClick.performed += instance.OnPointClick;
                 @PointClick.canceled += instance.OnPointClick;
+                @ChooseWC.started += instance.OnChooseWC;
+                @ChooseWC.performed += instance.OnChooseWC;
+                @ChooseWC.canceled += instance.OnChooseWC;
+                @ChooseBC.started += instance.OnChooseBC;
+                @ChooseBC.performed += instance.OnChooseBC;
+                @ChooseBC.canceled += instance.OnChooseBC;
+                @ChooseYC.started += instance.OnChooseYC;
+                @ChooseYC.performed += instance.OnChooseYC;
+                @ChooseYC.canceled += instance.OnChooseYC;
             }
         }
     }
@@ -272,6 +359,9 @@ public partial class @CharacterSwitch : IInputActionCollection2, IDisposable
         void OnSwitchRight(InputAction.CallbackContext context);
         void OnSwitchLeft(InputAction.CallbackContext context);
         void OnPointClick(InputAction.CallbackContext context);
+        void OnChooseWC(InputAction.CallbackContext context);
+        void OnChooseBC(InputAction.CallbackContext context);
+        void OnChooseYC(InputAction.CallbackContext context);
     }
     public interface IOpenSkinMenuActions
     {

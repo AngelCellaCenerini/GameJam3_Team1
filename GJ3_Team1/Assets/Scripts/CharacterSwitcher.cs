@@ -22,8 +22,8 @@ public class CharacterSwitcher : MonoBehaviour
 
     // Skin Menu & Skins
     public GameObject skinMenu;
-    public bool firstSkin = true;
-    public bool secondSkin = false;
+    public bool firstSkin = false;
+    public bool secondSkin = true;
     public bool thirdSkin = false;
 
     void Awake()
@@ -33,8 +33,8 @@ public class CharacterSwitcher : MonoBehaviour
         characterSwitch.SwitchMesh.SwitchRight.performed += switchRight;
 
         // States
-        firstSkin = true;
-        secondSkin = false;
+        firstSkin = false;
+        secondSkin = true;
         thirdSkin = false;
 }
 
