@@ -46,15 +46,8 @@ public class CheckPointRespawn : MonoBehaviour
             // Reset
             skinChange.isChanged = false;
 
-            // Respawn when Skin is Switched
-            if (floor2.activeSelf)
-            {
-                // Respawn Player
-                player.transform.position = respawnCoordinates.transform.position;
-                //respawnCoordinates = respawnCoordinates1;
-
-
-            }
+            // Trigger Respawn
+            StartCoroutine(ExecuteAfterTime(2.95f));
         }
 
         if (floor2.activeSelf)
@@ -64,7 +57,17 @@ public class CheckPointRespawn : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        // Respawn when Skin is Switched
+
+            // Respawn Player
+            player.transform.position = respawnCoordinates.transform.position;
+
+    }
+
+        void OnTriggerEnter(Collider other)
     {
         // Check if Player meets Checkpoint
         // Identify Checkpoint

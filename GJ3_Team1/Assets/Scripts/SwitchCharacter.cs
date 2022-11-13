@@ -178,7 +178,7 @@ public class SwitchCharacter : MonoBehaviour
         // Change Character
         blackCat.SetActive(true);
         whiteCat.SetActive(false);
-        //yellowCat.SetActive(false);
+        yellowCat.SetActive(false);
 
         // Update Character Status
         firstSkin = false;
