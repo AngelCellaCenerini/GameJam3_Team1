@@ -21,9 +21,16 @@ public class CheckPointRespawn : MonoBehaviour
 
     public bool lifeIsLost = false;
 
+    public GameObject cameraAngle;
+    Animator animator;
+
+
     void Awake()
     {
+        // Set Default Respawn
         respawnCoordinates = firstRespawn;
+        // Reference Camera Animator
+        animator = cameraAngle.GetComponent<Animator>();
     }
 
     void Start()
@@ -67,12 +74,18 @@ public class CheckPointRespawn : MonoBehaviour
             dropOffF1.SetActive(true);
             currentProgress = progress1;
             respawnCoordinates = respawnCoordinates1;
+
+            // Change Camera
+            animator.SetBool("secondFloor", true);
         }
         else if (other.gameObject.name == "CheckPoinTrigger2")
         {
             progress2 = true;
             currentProgress = progress2;
             respawnCoordinates = respawnCoordinates2;
+
+            // Change Camera
+            animator.SetBool("thirdFloor", true);
         }
 
         // Check if Player drops off platform
