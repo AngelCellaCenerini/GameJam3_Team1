@@ -262,7 +262,7 @@ public class AnimMovementController : MonoBehaviour
         }
         else
         {
-            characterController.Move(currentMovement * Time.deltaTime);
+            characterController.Move(currentMovement * Time.deltaTime * 1.6f);
         }
 
         // Animate
