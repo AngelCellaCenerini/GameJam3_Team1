@@ -13,19 +13,21 @@ public class SwitchCharacter : MonoBehaviour
     // Characters
     public GameObject blackCat;
     public GameObject whiteCat;
-    //public GameObject yellowCat;
+    public GameObject yellowCat;
 
     // Character Animators
     Animator animatorW;
     Animator animatorB;
     Animator animatorY;
 
-
     // Skin Menu & Skins
     public GameObject skinMenu;
-    public bool firstSkin = false;
-    public bool secondSkin = true;
+    public bool firstSkin = true;
+    public bool secondSkin = false;
     public bool thirdSkin = false;
+
+    // Confirmation Reference
+    public bool choiceIsConfirmed = false;
 
     void Awake()
     {
@@ -43,7 +45,7 @@ public class SwitchCharacter : MonoBehaviour
         // Character Animators
         animatorW = whiteCat.GetComponent<Animator>();
         animatorB = blackCat.GetComponent<Animator>();
-        //animatorY = yellowCat.GetComponent<Animator>();
+        animatorY = yellowCat.GetComponent<Animator>();
     }
 
     public void switchToWhite(InputAction.CallbackContext context)
@@ -79,46 +81,62 @@ public class SwitchCharacter : MonoBehaviour
             // Switch to Character 1
             if (pressedOne && !whiteCat.activeSelf)
             {
+                // Confirm Character Choice
+                choiceIsConfirmed = true;
+                // Close Menu
+                skinMenu.SetActive(false);
+
                 if (blackCat.activeSelf)
                 {
                     // Trigger Death Animation
-                    animatorB.SetBool("isDying", true);
-                    pressedOne = false;
-                    // Trigger Switch
-                    StartCoroutine(ChangeToWhite(2));
+                    animatorB.SetBool("isDying", true);  
                 }
-                /*
                 else if (yellowCat.activeSelf)
                 {
                     // Trigger Death Animation
                     animatorY.SetBool("isDying", true);
                 }
-                */
+
+                // Reset Input
+                pressedOne = false;
+                // Trigger Switch
+                StartCoroutine(ChangeToWhite(3));
             }
+
             // Switch to Character 2
             else if (pressedTwo && !blackCat.activeSelf)
             {
-                Debug.Log("switchB");
+                // Confirm Character Choice
+                choiceIsConfirmed = true;
+                // Close Menu
+                skinMenu.SetActive(false);
+
                 if (whiteCat.activeSelf)
                 {
                     // Trigger Death Animation
                     animatorW.SetBool("isDying", true);
-                    // Trigger Switch
-                    StartCoroutine(ChangeToBlack(2));
+                    
                 }
-                /*
                 else if (yellowCat.activeSelf)
                 {
                     // Trigger Death Animation
                     animatorY.SetBool("isDying", true);
                 }
-                */
-               
+
+                // Reset Input
+                pressedTwo = false;
+                // Trigger Switch
+                StartCoroutine(ChangeToBlack(3));
             }
-            /*
+
             // Switch to Character 3
             else if (pressedThree && !yellowCat.activeSelf)
             {
+                // Confirm Character Choice
+                choiceIsConfirmed = true;
+                // Close Menu
+                skinMenu.SetActive(false);
+
                 if (whiteCat.activeSelf)
                 {
                     // Trigger Death Animation
@@ -130,10 +148,11 @@ public class SwitchCharacter : MonoBehaviour
                     animatorB.SetBool("isDying", true);
                 }
 
+                // Reset Input
+                pressedThree = false;
                 // Trigger Switch
-                StartCoroutine(ChangeToYellow(2)); 
+                StartCoroutine(ChangeToYellow(3)); 
             }
-            */
 
         }
     }
@@ -142,25 +161,10 @@ public class SwitchCharacter : MonoBehaviour
     {
         yield return new WaitForSeconds(time1);
 
-        Debug.Log("changedToWhite");
-
-        // Reset Death Status
-        /*
-        if (animatorB.GetBool("isDying"))
-        {
-            animatorB.SetBool("isDying", false);
-        }
-        /*
-        else if (animatorY.GetBool("isDying"))
-        {
-            animatorY.SetBool("isDying", false);
-        }
-        */
-
         // Change Character
         blackCat.SetActive(false);
         whiteCat.SetActive(true);
-        //yellowCat.SetActive(false);
+        yellowCat.SetActive(false);
 
         // Update Character Status
         firstSkin = true;
@@ -170,19 +174,6 @@ public class SwitchCharacter : MonoBehaviour
     IEnumerator ChangeToBlack(float time2)
     {
         yield return new WaitForSeconds(time2);
-
-        Debug.Log("changedToBlack");
-        // Reset Death Status
-        if (animatorW.GetBool("isDying"))
-        {
-            animatorW.SetBool("isDying", false);
-        }
-        /*
-        else if (animatorY.GetBool("isDying"))
-        {
-            animatorY.SetBool("isDying", false);
-        }
-        */
 
         // Change Character
         blackCat.SetActive(true);
@@ -199,20 +190,10 @@ public class SwitchCharacter : MonoBehaviour
     {
         yield return new WaitForSeconds(time3);
 
-        // Reset Death Status
-        if (animatorB.GetBool("isDying"))
-        {
-            animatorB.SetBool("isDying", false);
-        }
-        else if (animatorW.GetBool("isDying"))
-        {
-            animatorW.SetBool("isDying", false);
-        }
-
         // Change Character
         blackCat.SetActive(false);
         whiteCat.SetActive(false);
-        //yellowCat.SetActive(true);
+        yellowCat.SetActive(true);
 
         // Update Character Status
         firstSkin = false;

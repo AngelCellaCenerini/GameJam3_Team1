@@ -51,11 +51,12 @@ public class AnimMovementController : MonoBehaviour
         // Reference
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
-        animator = blackCat.GetComponent<Animator>();
+        
         // Characte Animators
         animatorB = blackCat.GetComponent<Animator>();
         animatorW = whiteCat.GetComponent<Animator>();
         animatorY = yellowCat.GetComponent<Animator>();
+        animator = animatorB;
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");

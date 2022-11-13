@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleCollision : MonoBehaviour
 {
     // Check Player Character
-    public CharacterSwitcher characterScript;
+    public SwitchCharacter characterScript;
 
     private float forceApplied = 2.0f;
     public bool obstacleIsHit;

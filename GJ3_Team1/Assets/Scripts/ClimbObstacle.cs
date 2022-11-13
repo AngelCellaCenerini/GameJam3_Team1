@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ClimbObstacle : MonoBehaviour
 {
-    PlayerInput playerInput;
 
-    public CharacterSwitcher characterScript;
+    public SwitchCharacter characterScript;
 
-    bool isClimbing = false;
+    // White Cat 
+    public GameObject whiteCat;
+    Animator catAnimator;
+
     private Animator platformAnimator;
     private Animator platformAnimator2;
 
@@ -18,17 +19,10 @@ public class ClimbObstacle : MonoBehaviour
 
     void Awake()
     {
-        // References
-        playerInput = new PlayerInput();
         platformAnimator = platform.GetComponent<Animator>();
         platformAnimator2 = platform2.GetComponent<Animator>();
-        // Climb
-        playerInput.CharacterControls.Climb.performed += onClimb;
-    }
+        catAnimator = whiteCat.GetComponent<Animator>();
 
-    public void onClimb(InputAction.CallbackContext context)
-    {
-        isClimbing = context.ReadValueAsButton();
     }
 
     // Start is called before the first frame update
@@ -42,9 +36,11 @@ public class ClimbObstacle : MonoBehaviour
                 // Move Platform
                 platformAnimator.SetBool("isClimbing", true);
                 platformAnimator2.SetBool("isClimbing", true);
+                // Start Climbing Animation
+                catAnimator.SetBool("isClimbing", true);
 
                 // Trigger Ending
-                StartCoroutine(ExecuteAfterTime(2));
+                StartCoroutine(ExecuteAfterTime(1.5f));
 
             }
             
@@ -58,6 +54,8 @@ public class ClimbObstacle : MonoBehaviour
         // Reset Animation
         platformAnimator.SetBool("isClimbing", false);
         platformAnimator2.SetBool("isClimbing", false);
+        // Stop Climbing Animation
+        catAnimator.SetBool("isClimbing", false);
 
 
     }

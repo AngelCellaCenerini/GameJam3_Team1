@@ -16,7 +16,7 @@ public class LivesStringCounter : MonoBehaviour
 
     // Check Skin Menu Input
     [SerializeField] private Button confirmButton = null;
-    public ChangeCharacterUI characterChoice;
+    public SwitchCharacter characterChoice;
     // Check Obstacle Damage
     public ObstacleDamage obstacleDamage;
     // Check DropOff Damage
