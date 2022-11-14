@@ -43,17 +43,12 @@ public class CheckPointRespawn : MonoBehaviour
         // Check if Second Floor
         if (skinChange.isChanged) 
         {
-            // Reset
-            skinChange.isChanged = false;
-
             // Trigger Respawn
             StartCoroutine(ExecuteAfterTime(2.95f));
         }
-
-        if (floor2.activeSelf)
+        else
         {
-            // Respawn Player
-            respawnCoordinates = respawnCoordinates1;
+            return;
         }
     }
 
@@ -61,10 +56,13 @@ public class CheckPointRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         // Respawn when Skin is Switched
-
+        if (skinChange.isChanged)
+        {
+            // Reset
+            skinChange.isChanged = false;
             // Respawn Player
             player.transform.position = respawnCoordinates.transform.position;
-
+        }
     }
 
         void OnTriggerEnter(Collider other)
@@ -94,16 +92,17 @@ public class CheckPointRespawn : MonoBehaviour
         // Check if Player drops off platform
         if (other.gameObject.tag == "DropOff")
         {
-            Debug.Log("TriggeredDrop");
             // Check if User Reached CHeckpoint
             if (currentProgress)
             {
+                Debug.Log("Drop2");
                 // Respawn Player
                 player.transform.position = respawnCoordinates.transform.position;
             }
             else {
                 // Respawn Player
                 player.transform.position = respawnCoordinates.transform.position;
+                Debug.Log("Drop1");
                 // Apply Damage
                 lifeIsLost = true;
             }
