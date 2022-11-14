@@ -15,8 +15,7 @@ public class LivesStringCounter : MonoBehaviour
     private int currentLife = 9;
 
     // Check Skin Menu Input
-    [SerializeField] private Button confirmButton = null;
-    public ChangeCharacterUI characterChoice;
+    public SwitchCharacter characterChoice;
     // Check Obstacle Damage
     public ObstacleDamage obstacleDamage;
     // Check DropOff Damage
@@ -30,9 +29,6 @@ public class LivesStringCounter : MonoBehaviour
         score = "x"; 
         updatedScore = score + currentLife;
         livesCounter.text = updatedScore;
-
-        // CONFIRM Button
-        confirmButton.onClick.AddListener(handleCounting);
     }
 
     public void checkObstacleDamage()

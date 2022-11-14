@@ -12,6 +12,7 @@ TagManager:
   - CheckPoint
   - ButtonToPress
   - Ramp
+  - PushTrigger
   layers:
   - Default
   - TransparentFX

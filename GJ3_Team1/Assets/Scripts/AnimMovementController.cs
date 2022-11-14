@@ -9,6 +9,14 @@ public class AnimMovementController : MonoBehaviour
     PlayerInput playerInput;
     CharacterController characterController;
     Animator animator;
+    Animator animatorB;
+    Animator animatorY;
+    Animator animatorW;
+
+    // Cats
+    public GameObject blackCat;
+    public GameObject whiteCat;
+    public GameObject yellowCat;
 
     int isWalkingHash;
     int isRunningHash;
@@ -35,14 +43,20 @@ public class AnimMovementController : MonoBehaviour
     float rotationFactorPerFrame = 15.0f;
 
     // Player Character
-    public CharacterSwitcher characterScript;
+    // public CharacterSwitcher characterScript;
+    public SwitchCharacter characterScript;
 
     void Awake()
     {
         // Reference
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
-        // animator = GetComponent<Animator>();
+        
+        // Characte Animators
+        animatorB = blackCat.GetComponent<Animator>();
+        animatorW = whiteCat.GetComponent<Animator>();
+        animatorY = yellowCat.GetComponent<Animator>();
+        animator = animatorB;
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
@@ -137,10 +151,66 @@ public class AnimMovementController : MonoBehaviour
     }
 
     void handleAnimation() {
-        // Manage Animation Switches
-        bool isWalking = animator.GetBool(isWalkingHash);
-        bool isRunning = animator.GetBool(isRunningHash);
 
+        // Check Current Character
+        if (characterScript.firstSkin)
+        {
+            // White Cat
+            animator = animatorW;
+        }
+        else if (characterScript.secondSkin)
+        {
+            // Black Cat
+            animator = animatorB;
+        }
+        else if (characterScript.thirdSkin)
+        {
+            // Yellow Cat
+            animator = animatorY;
+        }
+
+
+        // WALK ANIMATION
+        // Animate
+        if (isMovementPressed)
+        {
+            // Walk
+            animator.SetBool("isWalking", true);
+        }
+        else if (!isMovementPressed)
+        {
+            // Stop Walking
+            animator.SetBool("isWalking", false);
+        }
+        // DEATH ANIMATION
+        if (isMovementPressed)
+        {
+            // Walk
+            animator.SetBool("isWalking", true);
+        }
+        else if (!isMovementPressed)
+        {
+            // Stop Walking
+            animator.SetBool("isWalking", false);
+        }
+        // JUMP ANIMATION
+        if (isJumpPressed && !isJumping)
+        {
+            // Walk
+            animator.SetBool("isJumping", true);
+        }
+        else if (!isJumpPressed && isJumping)
+        {
+            // Walk
+            animator.SetBool("isJumping", false);
+        }
+
+
+        // Manage Animation Switches
+        //bool isWalking = animator.GetBool(isWalkingHash);
+        //bool isRunning = animator.GetBool(isRunningHash);
+
+        /*
         // Animate
         if (isMovementPressed && !isWalking)
         {
@@ -163,6 +233,7 @@ public class AnimMovementController : MonoBehaviour
             // Stop Running
             animator.SetBool("isRunning", false);
         }
+        */
     }
 
     void handleGravity()
@@ -191,11 +262,11 @@ public class AnimMovementController : MonoBehaviour
         }
         else
         {
-            characterController.Move(currentMovement * Time.deltaTime);
+            characterController.Move(currentMovement * Time.deltaTime * 1.6f);
         }
 
         // Animate
-        // handleAnimation();
+        handleAnimation();
         // Update Direction
         // handleRotation();
 

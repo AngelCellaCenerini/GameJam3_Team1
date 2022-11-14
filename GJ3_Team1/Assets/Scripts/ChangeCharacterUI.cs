@@ -8,25 +8,17 @@ public class ChangeCharacterUI : MonoBehaviour
     public GameObject skinMenu;
     OpenSkinMenu characterSwitch;
     public bool isPressed;
-    public bool isClosed;
-    public bool choiceIsConfirmed = false;
 
     void Awake()
     {
         // Handle Input Action
         characterSwitch = new OpenSkinMenu();
         characterSwitch.SkinMenu.OpenSkinMenu.performed += triggerMenu;
-        characterSwitch.SkinMenu.CloseSkinMenu.performed += untriggerMenu;
     }
 
     public void triggerMenu(InputAction.CallbackContext context)
     {
         isPressed = context.ReadValueAsButton();
-    }
-
-    public void untriggerMenu(InputAction.CallbackContext context)
-    {
-        isClosed = context.ReadValueAsButton();
     }
 
     public void handleMenu()
@@ -39,39 +31,13 @@ public class ChangeCharacterUI : MonoBehaviour
                 skinMenu.SetActive(true);
                 isPressed = false;
             }
-        }
-
-        
-        if (skinMenu.activeSelf)
-        {
-            // Close menu
-            if (isClosed)
+            else
             {
-                choiceIsConfirmed = true;
-                if (skinMenu.activeSelf)
-                {
-                    skinMenu.SetActive(false);
-                    isClosed = false;
-                }
+                skinMenu.SetActive(false);
+                isPressed = false;
             }
         }
         
-    }
-
-    public void openMenu()
-    {
-        if (!skinMenu.activeSelf)
-        {
-            skinMenu.SetActive(true);
-        }      
-    }
-
-    public void closeMenu()
-    {
-        if (skinMenu.activeSelf)
-        {
-            skinMenu.SetActive(false);
-        }
     }
 
     void Update()

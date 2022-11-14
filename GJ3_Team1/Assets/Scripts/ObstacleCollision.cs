@@ -5,10 +5,32 @@ using UnityEngine;
 public class ObstacleCollision : MonoBehaviour
 {
     // Check Player Character
-    public CharacterSwitcher characterScript;
+    public SwitchCharacter characterScript;
+    public GameObject yellowCat;
+    Animator animator;
 
     private float forceApplied = 2.0f;
     public bool obstacleIsHit;
+    bool pushPressed = false;
+
+    private void Awake()
+    {
+        animator = yellowCat.GetComponent<Animator>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (pushPressed)
+        {
+            // Trigger Cat Animation
+            animator.SetBool("isPushing", true);
+        }
+        else
+        {
+            // Trigger Cat Animation
+            animator.SetBool("isPushing", false);
+        }
+    }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -24,6 +46,7 @@ public class ObstacleCollision : MonoBehaviour
                 // Check if null
                 if (obstacleBody != null)
                 {
+                    pushPressed = true;  
                     // Direct Force
                     Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
                     // Remove Y coordinate
@@ -33,7 +56,20 @@ public class ObstacleCollision : MonoBehaviour
                     // Apply Force
                     obstacleBody.AddForceAtPosition(forceDirection * forceApplied, transform.position, ForceMode.Impulse);
                 }
+                else
+                {
+                    pushPressed = false;
+                }
             }
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "PushTrigger")
+        {
+            pushPressed = false;
         }
     }
 }
