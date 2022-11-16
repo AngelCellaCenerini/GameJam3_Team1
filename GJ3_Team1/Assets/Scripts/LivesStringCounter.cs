@@ -23,6 +23,7 @@ public class LivesStringCounter : MonoBehaviour
 
     public bool isChanged = false;
 
+
     void Awake()
     {
 
@@ -42,6 +43,7 @@ public class LivesStringCounter : MonoBehaviour
             dropOffDamage.lifeIsLost = false;
             // Respawn
             isChanged = true;
+
         }
     }
 

@@ -20,6 +20,12 @@ public class SwitchCharacter : MonoBehaviour
     Animator animatorB;
     Animator animatorY;
 
+    // Skills Icons
+    public GameObject climbSkillIcon;
+    public GameObject jumpSkillIcon;
+    public GameObject pushSkillIcon;
+
+
     // Skin Menu & Skins
     public GameObject skinMenu;
     public bool firstSkin = true;
@@ -28,6 +34,11 @@ public class SwitchCharacter : MonoBehaviour
 
     // Confirmation Reference
     public bool choiceIsConfirmed = false;
+    public bool isConfirmed = false;
+
+    // SFXs
+    public AudioSource audio;
+    public AudioClip catDeath;
 
     void Awake()
     {
@@ -46,6 +57,14 @@ public class SwitchCharacter : MonoBehaviour
         animatorW = whiteCat.GetComponent<Animator>();
         animatorB = blackCat.GetComponent<Animator>();
         animatorY = yellowCat.GetComponent<Animator>();
+
+        // Skills Icons
+        climbSkillIcon.SetActive(true);
+        jumpSkillIcon.SetActive(false);
+        pushSkillIcon.SetActive(false);
+
+        // Audio Resource
+        audio = GetComponent<AudioSource>();
     }
 
     public void switchToWhite(InputAction.CallbackContext context)
@@ -83,6 +102,9 @@ public class SwitchCharacter : MonoBehaviour
             {
                 // Confirm Character Choice
                 choiceIsConfirmed = true;
+                isConfirmed = true;
+                // Play SFX
+                playSFX();
                 // Close Menu
                 skinMenu.SetActive(false);
 
@@ -108,6 +130,9 @@ public class SwitchCharacter : MonoBehaviour
             {
                 // Confirm Character Choice
                 choiceIsConfirmed = true;
+                isConfirmed = true;
+                // Play SFX
+                playSFX();
                 // Close Menu
                 skinMenu.SetActive(false);
 
@@ -134,6 +159,9 @@ public class SwitchCharacter : MonoBehaviour
             {
                 // Confirm Character Choice
                 choiceIsConfirmed = true;
+                isConfirmed = true;
+                // Play SFX
+                playSFX();
                 // Close Menu
                 skinMenu.SetActive(false);
 
@@ -202,11 +230,44 @@ public class SwitchCharacter : MonoBehaviour
 
     }
 
+    void handleIcons()
+    {
+        if (firstSkin)
+        {
+            // Skills Icons
+            climbSkillIcon.SetActive(true);
+            jumpSkillIcon.SetActive(false);
+            pushSkillIcon.SetActive(false);
+        }
+        else if (secondSkin)
+        {
+            // Skills Icons
+            climbSkillIcon.SetActive(false);
+            jumpSkillIcon.SetActive(true);
+            pushSkillIcon.SetActive(false);
+        }
+        else if (thirdSkin)
+        {
+            // Skills Icons
+            climbSkillIcon.SetActive(false);
+            jumpSkillIcon.SetActive(false);
+            pushSkillIcon.SetActive(true);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Handle Keyboard Input
         handleSwitch();
+        // Update UI
+        handleIcons();
+    }
+
+    void playSFX()
+    {
+        audio.clip = catDeath;
+        audio.Play();
     }
 
     void OnEnable()

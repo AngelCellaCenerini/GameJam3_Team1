@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitButton : MonoBehaviour
 {
     public GameObject stairs;
+    public GameObject fakeWall;
 
     void Awake()
     {
@@ -22,6 +23,8 @@ public class HitButton : MonoBehaviour
         {
             // Unlock Stairs
             stairs.SetActive(true);
+            // Deactivate Crate Collider
+            fakeWall.SetActive(false);
         }
     }
 }
