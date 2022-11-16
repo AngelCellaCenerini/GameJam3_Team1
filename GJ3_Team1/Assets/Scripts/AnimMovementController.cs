@@ -34,7 +34,7 @@ public class AnimMovementController : MonoBehaviour
     float runMultiplier = 3.0f;
     float rotationFractorPerFrame = 1.0f;
     float initialJumpVelocity;
-    float maxJumpHeight = 1.0f;
+    float maxJumpHeight = 0.7f;
     float maxJumpTime = 0.5f;
     // Gravity
     float groundedGravity = -.05f;

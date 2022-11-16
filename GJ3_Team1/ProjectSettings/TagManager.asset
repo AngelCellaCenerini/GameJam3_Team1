@@ -13,6 +13,9 @@ TagManager:
   - ButtonToPress
   - Ramp
   - PushTrigger
+  - AnimStop
+  - FinalButton
+  - FinalLadder
   layers:
   - Default
   - TransparentFX

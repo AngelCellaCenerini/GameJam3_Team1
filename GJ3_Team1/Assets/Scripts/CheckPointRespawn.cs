@@ -29,6 +29,10 @@ public class CheckPointRespawn : MonoBehaviour
     public AudioSource audio;
     public AudioClip catRespawn;
 
+    // Ramp
+    public GameObject ramp;
+    Animator animatorRamp;
+
 
     void Awake()
     {
@@ -36,6 +40,7 @@ public class CheckPointRespawn : MonoBehaviour
         respawnCoordinates = firstRespawn;
         // Reference Camera Animator
         animator = cameraAngle.GetComponent<Animator>();
+        animatorRamp = ramp.GetComponent<Animator>();
         // Audio Resource
         audio = GetComponent<AudioSource>();
     }
@@ -86,6 +91,10 @@ public class CheckPointRespawn : MonoBehaviour
             dropOffF1.SetActive(true);
             currentProgress = progress1;
             respawnCoordinates = respawnCoordinates1;
+
+            // Ramp
+            // Push Ramp
+            animatorRamp.SetBool("isDown", true);
 
             // Change Camera
             animator.SetBool("secondFloor", true);

@@ -12,6 +12,7 @@ public class ObstacleCollision : MonoBehaviour
     private float forceApplied = 2.0f;
     public bool obstacleIsHit;
     bool pushPressed = false;
+    bool hasExited = false;
 
     private void Awake()
     {
@@ -22,8 +23,11 @@ public class ObstacleCollision : MonoBehaviour
     {
         if (pushPressed)
         {
-            // Trigger Cat Animation
-            animator.SetBool("isPushing", true);
+            if (!hasExited)
+            {
+                // Trigger Cat Animation
+                animator.SetBool("isPushing", true);
+            }
         }
         else
         {
@@ -70,6 +74,27 @@ public class ObstacleCollision : MonoBehaviour
         if (other.gameObject.tag == "PushTrigger")
         {
             pushPressed = false;
+            hasExited = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "AnimStop")
+        {
+            //pushPressed = false;
+            //hasExited = true;
+        }
+
+        if (other.gameObject.tag == "PushTrigger")
+        {
+            if (hasExited)
+            {
+                pushPressed = false;
+                hasExited = false;
+            }
+            //pushPressed = false;
+            //hasExited = true;
         }
     }
 }
