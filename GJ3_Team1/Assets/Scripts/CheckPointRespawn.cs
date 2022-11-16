@@ -17,12 +17,17 @@ public class CheckPointRespawn : MonoBehaviour
     public GameObject dropOffF1;
 
     public LivesStringCounter skinChange;
+    public SwitchCharacter characterChoice;
     public GameObject floor2;
 
     public bool lifeIsLost = false;
 
     public GameObject cameraAngle;
     Animator animator;
+
+    // SFXs
+    public AudioSource audio;
+    public AudioClip catRespawn;
 
 
     void Awake()
@@ -31,6 +36,8 @@ public class CheckPointRespawn : MonoBehaviour
         respawnCoordinates = firstRespawn;
         // Reference Camera Animator
         animator = cameraAngle.GetComponent<Animator>();
+        // Audio Resource
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -41,8 +48,10 @@ public class CheckPointRespawn : MonoBehaviour
     void Update()
     {
         // Check if Second Floor
-        if (skinChange.isChanged) 
+        if (skinChange.isChanged && characterChoice.isConfirmed) 
         {
+            // No change
+            characterChoice.isConfirmed = false;
             // Trigger Respawn
             StartCoroutine(ExecuteAfterTime(2.95f));
         }
@@ -62,6 +71,8 @@ public class CheckPointRespawn : MonoBehaviour
             skinChange.isChanged = false;
             // Respawn Player
             player.transform.position = respawnCoordinates.transform.position;
+            // SFX
+            playSFX();
         }
     }
 
@@ -93,19 +104,33 @@ public class CheckPointRespawn : MonoBehaviour
         if (other.gameObject.tag == "DropOff")
         {
             // Check if User Reached CHeckpoint
-            if (currentProgress)
-            {
-                Debug.Log("Drop2");
+            //if (currentProgress)
+            //{
                 // Respawn Player
                 player.transform.position = respawnCoordinates.transform.position;
-            }
-            else {
+                // SFX
+                playSFX();
+                if (!currentProgress)
+                {
+                    // Apply Damage
+                    lifeIsLost = true;
+                }
+            //}
+            //else {
                 // Respawn Player
-                player.transform.position = respawnCoordinates.transform.position;
-                Debug.Log("Drop1");
+                //player.transform.position = respawnCoordinates.transform.position;
+                // SFX
+                //playSFX();
                 // Apply Damage
-                lifeIsLost = true;
-            }
+                //lifeIsLost = true;
+            //}
         }
+    }
+
+    void playSFX()
+    {
+        //AudioClip.PlayOneShot(catRespawn, 0.2f);
+        audio.clip = catRespawn;
+        audio.Play();
     }
 }
