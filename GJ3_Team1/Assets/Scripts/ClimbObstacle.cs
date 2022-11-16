@@ -83,7 +83,7 @@ public class ClimbObstacle : MonoBehaviour
                 newAnimator3.SetBool("isClimbing", true);
                 // Start Climbing Animation
                 catAnimator.SetBool("isClimbing", true);
-                StartCoroutine(finalAnim(4f));
+                StartCoroutine(finalAnim(3f));
 
                 // Change Camera
                 animator.SetBool("fourthFloor", true);

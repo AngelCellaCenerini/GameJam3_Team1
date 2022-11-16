@@ -976,7 +976,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1367181454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e107b4ac34010514ebb8a54e2c597359, type: 3}
+  m_Script: {fileID: 11500000, guid: c5999bb697a5e034d8465fe4a0360fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1367181457
@@ -1024,8 +1024,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1367181456}
-        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
-        m_MethodName: playGame
+        m_TargetAssemblyTypeName: backToMenu, Assembly-CSharp
+        m_MethodName: goBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -4568,7 +4568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774036417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: 2}
+  m_LocalPosition: {x: -4.5, y: 2, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 153933760}
@@ -21826,8 +21826,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076850631795180975}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1.3, y: 0.7678537, z: 0.04022715}
-  m_LocalScale: {x: 68.063896, y: 68.06389, z: 68.06389}
+  m_LocalPosition: {x: -1.3, y: 1.1, z: 0.04022715}
+  m_LocalScale: {x: 68.063896, y: 68.06389, z: 106.376785}
   m_Children:
   - {fileID: 705373381}
   - {fileID: 2063141937}
@@ -23185,6 +23185,7 @@ GameObject:
   - component: {fileID: 4083501150119358579}
   - component: {fileID: 3260616447795565150}
   - component: {fileID: 7762067043462220751}
+  - component: {fileID: 8707273951644772815}
   m_Layer: 0
   m_Name: BackWall
   m_TagString: Untagged
@@ -23192,6 +23193,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &8707273951644772815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707273951644772814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.019999998, z: 0.040475488}
+  m_Center: {x: 0, y: 0.000000059604645, z: 0.010237746}
 --- !u!4 &8709558067061846489
 Transform:
   m_ObjectHideFlags: 0
